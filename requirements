@@ -1,0 +1,8 @@
+# packages:
+- g++
+- clang-3.8
+- llvm
+- llvm-3.8
+- llvm-3.8-dev
+- libclang-3.8-dev
+- libz-dev
