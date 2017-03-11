@@ -1,9 +1,13 @@
 #-------------------------------------------------------------------------------
-# Sample makefile for building the code samples. Read inline comments for
-# documentation.
+# This Makefile was created based on sample makefile from Eli Bendersky for
+# `llvm-clang-samples` repository.
 #
 # Eli Bendersky (eliben@gmail.com)
+# https://github.com/eliben/llvm-clang-samples/blob/master/Makefile
 # This code is in the public domain
+#
+# Changes:
+# Vaclav Kondula (xkondu00@stud.fit.vutbr.cz)
 #-------------------------------------------------------------------------------
 
 # The following variables will likely need to be customized, depending on where
@@ -104,6 +108,7 @@ CLANG_LIBS := \
 # Internal paths in this project: where to find sources, and where to put
 # build artifacts.
 BUILDDIR := build
+SOURCE := src/CFGGen.cpp src/external_lib/json.hpp
 
 .PHONY: all
 all: make_builddir \
@@ -113,9 +118,9 @@ all: make_builddir \
 make_builddir:
 	@test -d $(BUILDDIR) || mkdir $(BUILDDIR)
 
-$(BUILDDIR)/cfg-gen: CFGGen.cpp
-	$(CXX) $(CXXFLAGS) $(LLVM_CXXFLAGS) $^ \
+$(BUILDDIR)/cfg-gen:
+	$(CXX) $(CXXFLAGS) $(LLVM_CXXFLAGS) $(SOURCE) \
 		$(CLANG_LIBS) $(LLVM_LDFLAGS) -o $@
 
 clean:
-	rm -rf $(BUILDDIR)/* *.dot
+	rm -rf $(BUILDDIR)/* *.dot tests/*.ll

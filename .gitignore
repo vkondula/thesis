@@ -7,4 +7,5 @@ Project.cbp
 build/*
 CMakeLists.txt
 CMakeCache.txt
+*.ll
 

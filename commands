@@ -1,4 +1,8 @@
 ## BASIC 
-./build/cfg-gen  tests/1test.c -- -std=c99 -I /usr/lib/llvm-3.8/lib/clang/3.8.0/include
+./build/cfg-gen  tests/1test.c -- -std=c99 -I /usr/lib/llvm-3.8/lib/clang/3.8.0/include -O0 -g
+
+## Recursive function
+
+./build/cfg-gen  tests/2test.c -- -std=c99 -I /usr/lib/llvm-3.8/lib/clang/3.8.0/include -O0 -g
 
 

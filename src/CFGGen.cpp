@@ -1,5 +1,6 @@
 // Declares clang::SyntaxOnlyAction.
 #include <iostream>
+#include <memory>
 #include <clang/Basic/LangOptions.h>
 #include "clang/AST/Decl.h"
 #include "clang/Analysis/CFG.h"
@@ -57,10 +58,23 @@ static cl::extrahelp MoreHelp("\nMore help text...");
 class EmitMetadataAction : public  clang::EmitLLVMAction {
     using clang::EmitLLVMAction::EmitLLVMAction;
     void EndSourceFileAction() override{
+        clang::EmitLLVMAction::EndSourceFileAction();
         std::unique_ptr<llvm::Module> module = this->takeModule();
         if (!module) return;
         std::cout << "got_it" << "\n";
-        module->dump();
+        for (llvm::Module::iterator a = module->begin(), b = module->end(); a!=b; a++){
+            std::cout << "fml\n\n";
+            for (llvm::Function::iterator block = a->begin(), block_end = a->end(); block!=block_end; block++){
+                std::cout << "block\n\n";
+                for (llvm::BasicBlock::iterator inst = block->begin(), inst_end = block->end(); inst!=inst_end; inst++){
+                    std::cout << "instruction\n\n";
+                    inst->dump();
+                    llvm::DebugLoc deb = inst->getDebugLoc();
+                    if (!deb) continue;
+                    std::cout << "line:" << deb.getLine() << "\n";
+                }
+            }
+        }
     }
 
 };
