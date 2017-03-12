@@ -64,7 +64,7 @@ $(info -----------------------------------------------)
 CXX := g++
 CXXFLAGS := -fno-rtti -O0 -g
 
-LLVM_CXXFLAGS := `llvm-config --cxxflags`
+LLVM_CXXFLAGS := `llvm-config --cxxflags | sed 's/ \-W[-a-zA-Z]*//g' | sed 's/ -pedantic//' | sed 's/ -fno-exceptions//'`
 LLVM_LDFLAGS := `llvm-config --ldflags --libs --system-libs`
 
 # These are required when compiling vs. a source distribution of Clang. For
@@ -108,19 +108,22 @@ CLANG_LIBS := \
 # Internal paths in this project: where to find sources, and where to put
 # build artifacts.
 BUILDDIR := build
-SOURCE := src/CFGGen.cpp src/external_lib/json.hpp
+SOURCE := src/CFGGen.cpp src/jsonGen.cpp src/external_lib/json.hpp
 
 .PHONY: all
 all: make_builddir \
 	$(BUILDDIR)/cfg-gen
 
+
 .PHONY: make_builddir
 make_builddir:
 	@test -d $(BUILDDIR) || mkdir $(BUILDDIR)
 
+
 $(BUILDDIR)/cfg-gen:
 	$(CXX) $(CXXFLAGS) $(LLVM_CXXFLAGS) $(SOURCE) \
 		$(CLANG_LIBS) $(LLVM_LDFLAGS) -o $@
+
 
 clean:
 	rm -rf $(BUILDDIR)/* *.dot tests/*.ll

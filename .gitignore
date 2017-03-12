@@ -8,4 +8,5 @@ build/*
 CMakeLists.txt
 CMakeCache.txt
 *.ll
+*.gch
 

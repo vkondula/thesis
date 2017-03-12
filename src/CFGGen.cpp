@@ -1,21 +1,5 @@
-// Declares clang::SyntaxOnlyAction.
-#include <iostream>
-#include <memory>
-#include <clang/Basic/LangOptions.h>
-#include "clang/AST/Decl.h"
-#include "clang/Analysis/CFG.h"
-#include "clang/ASTMatchers/ASTMatchers.h"
-#include "clang/ASTMatchers/ASTMatchFinder.h"
-#include "llvm/IR/CFG.h"
-#include "llvm/IR/Module.h"
-#include "llvm/IR/BasicBlock.h"
-#include "clang/CodeGen/CodeGenAction.h"
-#include "clang/Frontend/FrontendActions.h"
-#include "clang/Tooling/CommonOptionsParser.h"
-#include "clang/Tooling/Tooling.h"
-// Declares llvm::cl::extrahelp.
-#include "llvm/Support/CommandLine.h"
-
+#include "CFGGen.hpp"
+#include "jsonGen.hpp"
 
 using namespace clang::tooling;
 using namespace llvm;
@@ -32,53 +16,29 @@ static cl::extrahelp CommonHelp(CommonOptionsParser::HelpMessage);
 // A help message for this specific tool can be added afterwards.
 static cl::extrahelp MoreHelp("\nMore help text...");
 
-//class FunctionCallback : public clang::ast_matchers::MatchFinder::MatchCallback {
-//public:
-//    virtual void run(const clang::ast_matchers::MatchFinder::MatchResult &Result){
-//        using namespace clang::ast_matchers;
-//        const clang::FunctionDecl * fn = Result.Nodes.getNodeAs<clang::FunctionDecl>("functionDef");
-//        const clang::SourceManager * src_mng = Result.SourceManager;
-//        const clang::ASTContext * ast_con = Result.Context;
-//        const clang::LangOptions & lang_opt = ast_con->getLangOpts();
-//        std::string name = fn->getNameInfo().getAsString();
-//        std::cout << "It's something!" << name << "\n";
-//        std::unique_ptr<clang::CFG> src_cfg = clang::CFG::buildCFG(
-//                fn, fn->getBody(), Result.Context, clang::CFG::BuildOptions()
-//        );
-//        for (clang::CFG::iterator a = src_cfg->begin(), b = src_cfg->end(); a!=b; a++){
-//            (*a)->dump();
-//        }
-//
-//        clang::CFGBlock & front = src_cfg->getExit();
-//        std::cout << src_cfg->size() << "<<size \n";
-//        std::cout << "defuq" << "\n";
-//    }
-//};
+// Callback at the end of Generating LLVM IR code
+// Allows to access llvm::Module
+void EmitMetadataAction::EndSourceFileAction(){
+    clang::EmitLLVMAction::EndSourceFileAction();
+    std::unique_ptr<llvm::Module> module = this->takeModule();
+    if (!module) return;
+    FormatFactory factory;
+    FormatGen * generator = factory.getFormatGen(this->format);
+    std::cout << "It's something!" << this->format << "\n";
+    if (!generator) return;
+    generator->build(module.get());
+    generator->output();
+}
 
-class EmitMetadataAction : public  clang::EmitLLVMAction {
-    using clang::EmitLLVMAction::EmitLLVMAction;
-    void EndSourceFileAction() override{
-        clang::EmitLLVMAction::EndSourceFileAction();
-        std::unique_ptr<llvm::Module> module = this->takeModule();
-        if (!module) return;
-        std::cout << "got_it" << "\n";
-        for (llvm::Module::iterator a = module->begin(), b = module->end(); a!=b; a++){
-            std::cout << "fml\n\n";
-            for (llvm::Function::iterator block = a->begin(), block_end = a->end(); block!=block_end; block++){
-                std::cout << "block\n\n";
-                for (llvm::BasicBlock::iterator inst = block->begin(), inst_end = block->end(); inst!=inst_end; inst++){
-                    std::cout << "instruction\n\n";
-                    inst->dump();
-                    llvm::DebugLoc deb = inst->getDebugLoc();
-                    if (!deb) continue;
-                    std::cout << "line:" << deb.getLine() << "\n";
-                }
-            }
-        }
+// Factory for output generator in specific format
+// For now only JSON is available
+FormatGen * FormatFactory::getFormatGen(std::string format){
+    if (format.compare("json") == 0){
+        return new JsonGen();
+    } else {
+        return NULL;
     }
-
-};
-
+}
 
 int main(int argc, const char **argv) {
     using namespace clang::tooling;
