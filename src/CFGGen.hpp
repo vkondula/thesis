@@ -20,11 +20,10 @@
 
 class FormatGen {
 public:
-    virtual std::string getName() = 0;
-    virtual void setStream(FILE *) = 0;
+    virtual void set_stream(FILE *) = 0;
     virtual int build(llvm::Module *) = 0;
     virtual int output() = 0;
-    virtual std::string getOutput() = 0;
+    virtual std::string get_output() = 0;
 };
 
 class FormatFactory {
