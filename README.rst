@@ -43,8 +43,6 @@ TODOs:
 ------
 
     - make flags ``-O0 -g`` implicit
-    - entry and exit points in CFG (URGENT)
-    - successors and predecessors (URGENT)
     - specify output stream
     - allow tool to get cmd line parameters
     - add help to tool
@@ -59,3 +57,5 @@ DONE:
     - generate UUID (count ID from zero instead)
     - format output json
     - propagate ``ploc`` to BB and CFG
+    - entry and exit points in CFG
+    - successors and predecessors

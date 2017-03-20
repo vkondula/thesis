@@ -1,6 +1,7 @@
 #ifndef PROJECT_JSONGEN_H
 #define PROJECT_JSONGEN_H
 
+#include <map>
 #include <llvm/IR/Module.h>
 #include <llvm/IR/DebugLoc.h>
 #include <llvm/IR/DebugInfoMetadata.h>
@@ -24,23 +25,22 @@ private:
 };
 
 class ProgramLocJson;
+class CFGJson;
 
 class JsonWrapper {
 public:
     json get_json();
     std::string get_string();
-    ProgramLocJson * get_min() {return nullptr;}; //TODO
-    ProgramLocJson * get_max() {return nullptr;}; //TODO
+    int get_id(){ return this->id; }
     virtual int build() = 0;
-    static int get_id();
+    static int gen_id();
 
 
 protected:
     json scope = nullptr;
     bool built = false;
-    ProgramLocJson * min;
-    ProgramLocJson * max;
-    static int id;
+    static int id_counter;
+    int id = 0;
 };
 
 class ProgramLocJson : public JsonWrapper {
@@ -73,9 +73,15 @@ public:
         this->bb = bb;
     }
     int build();
+    void set_predecessors(CFGJson *);
+    void set_successors(CFGJson *);
+    bool is_entry() {return this->entry;}
+    bool is_exit() {return this->exit;}
 
 private:
     llvm::BasicBlock * bb;
+    bool entry = false;
+    bool exit = false;
 };
 
 class CFGJson : public JsonWrapper {
@@ -84,9 +90,12 @@ public:
         this->fce = fce;
     }
     int build();
+    int find_bb(llvm::BasicBlock *);
+    void add_bb(llvm::BasicBlock *, int);
 
 private:
     llvm::Function * fce;
+    std::map<llvm::BasicBlock *, int> bb_ids;
 };
 
 class ModuleJson : public JsonWrapper {
