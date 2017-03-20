@@ -36,7 +36,7 @@ FormatGen * FormatFactory::getFormatGen(std::string format){
     if (format.compare("json") == 0){
         return new JsonGen();
     } else {
-        return NULL;
+        return nullptr;
     }
 }
 

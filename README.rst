@@ -43,14 +43,19 @@ TODOs:
 ------
 
     - make flags ``-O0 -g`` implicit
-    - dump ``raw_llvm`` correctly (URGENT)
-    - get file name from DebugLoc (URGENT)
-    - propagate ``ploc`` to BB and CFG (URGENT)
     - entry and exit points in CFG (URGENT)
-    - entry and exit points in BB (URGENT)
-    - generate UUID (HIGH PRIORITY)
+    - successors and predecessors (URGENT)
     - specify output stream
-    - format output json
     - allow tool to get cmd line parameters
     - add help to tool
 
+DONE:
+-----
+
+14.3. - 21.3.
+
+    - dump ``raw_llvm`` correctly
+    - get file name from DebugLoc
+    - generate UUID (count ID from zero instead)
+    - format output json
+    - propagate ``ploc`` to BB and CFG
