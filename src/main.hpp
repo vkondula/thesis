@@ -17,20 +17,10 @@
 #include "clang/Tooling/CommonOptionsParser.h"
 #include "clang/Tooling/Tooling.h"
 #include "llvm/Support/CommandLine.h"
+#include "formater.hpp"
+#include "cfg_gen.hpp"
 
-class FormatGen {
-public:
-    virtual void set_stream(FILE *) = 0;
-    virtual int build(llvm::Module *) = 0;
-    virtual int output() = 0;
-    virtual std::string get_output() = 0;
-};
 
-class FormatFactory {
-public:
-    FormatFactory(){};
-    FormatGen * getFormatGen(std::string format);
-};
 
 class EmitMetadataAction : public  clang::EmitLLVMAction {
     using clang::EmitLLVMAction::EmitLLVMAction;

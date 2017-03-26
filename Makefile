@@ -108,7 +108,7 @@ CLANG_LIBS := \
 # Internal paths in this project: where to find sources, and where to put
 # build artifacts.
 BUILDDIR := build
-SOURCE := src/CFGGen.cpp src/jsonGen.cpp src/external_lib/json.hpp
+SOURCE := src/main.cpp src/cfg_gen.cpp src/formater.cpp src/external_lib/json.hpp
 
 .PHONY: all
 all: make_builddir \

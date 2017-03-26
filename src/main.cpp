@@ -1,5 +1,4 @@
-#include "CFGGen.hpp"
-#include "jsonGen.hpp"
+#include "main.hpp"
 
 using namespace clang::tooling;
 using namespace llvm;
@@ -22,22 +21,15 @@ void EmitMetadataAction::EndSourceFileAction(){
     clang::EmitLLVMAction::EndSourceFileAction();
     std::unique_ptr<llvm::Module> module = this->takeModule();
     if (!module) return;
+    // Build Metadata structure for module
+    ModuleMeta mod(module.get());
+    if (mod.build()) return;
+    // Print to set output stream (stdout) in set format (json)
     FormatFactory factory;
-    FormatGen * generator = factory.getFormatGen(this->format);
-    std::cout << "It's something!" << this->format << "\n";
-    if (!generator) return;
-    generator->build(module.get());
-    generator->output();
-}
-
-// Factory for output generator in specific format
-// For now only JSON is available
-FormatGen * FormatFactory::getFormatGen(std::string format){
-    if (format.compare("json") == 0){
-        return new JsonGen();
-    } else {
-        return nullptr;
-    }
+    Formater * formater = factory.getFormatGen(format);
+    std::cerr << "It's something!" << format << "\n";
+    formater->build(&mod);
+    std::cout << formater->get_output();
 }
 
 int main(int argc, const char **argv) {
