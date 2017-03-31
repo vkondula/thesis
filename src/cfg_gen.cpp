@@ -12,7 +12,7 @@ int MetadataWrapper::gen_id() {
 int ModuleMeta::build() {
     built = true;
     id = MetadataWrapper::gen_id();
-    for (llvm::Module::iterator fce = this->module->begin(), end = this->module->end(); fce!=end; fce++){
+    for (llvm::Module::iterator fce = module->begin(), end = module->end(); fce!=end; fce++){
         if (!&*fce) continue;
         CFGMeta * cfg = new CFGMeta(&*fce);
         if (int retval = cfg->build()){
@@ -29,7 +29,7 @@ int CFGMeta::build() {
     built = true;
     id = MetadataWrapper::gen_id();
     // 1st iteration... Create BB(generate id) and Instruction
-    for (llvm::Function::iterator bb = this->fce->begin(), end = this->fce->end(); bb!=end; bb++){
+    for (llvm::Function::iterator bb = fce->begin(), end = fce->end(); bb!=end; bb++){
         if (!&*bb) continue;
         BasicBlockMeta * basic_block = new BasicBlockMeta(&*bb);
         if (int retval = basic_block->build()){
@@ -69,7 +69,7 @@ void CFGMeta::add_bb(llvm::BasicBlock * bb, BasicBlockMeta * meta){
 int BasicBlockMeta::build() {
     built = true;
     id = MetadataWrapper::gen_id();
-    for (llvm::BasicBlock::iterator inst = this->bb->begin(), end = this->bb->end(); inst!=end; inst++){
+    for (llvm::BasicBlock::iterator inst = bb->begin(), end = bb->end(); inst!=end; inst++){
         if (!&*inst) continue;
         InstructionMeta * instruction = new InstructionMeta(&*inst);
         if (int retval = instruction->build()){
@@ -111,7 +111,7 @@ int InstructionMeta::build() {
         if (ploc->build()) return 1;
     }
     // Transfer llvm::Instruction to human readable form
-    raw_llvm = this->get_inst_string();
+    raw_llvm = get_inst_string();
     return 0;
 }
 
