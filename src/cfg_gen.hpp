@@ -55,12 +55,16 @@ public:
     int build();
     ProgramLoc * get_ploc(){ return ploc; }
     std::string get_raw_llvm(){ return raw_llvm; }
+    std::vector<llvm::Value *> get_operands() { return operands; }
+    std::string get_defined_variable() { return defined_variable; }
 
 private:
     std::string get_inst_string();
     llvm::Instruction * inst;
     ProgramLoc * ploc = nullptr;
     std::string raw_llvm;
+    std::vector<llvm::Value *> operands;
+    std::string defined_variable = "";
 };
 
 class BasicBlockMeta : public MetadataWrapper {
@@ -74,16 +78,19 @@ public:
         }
     }
     int build();
-    void set_predecessors(CFGMeta *);
-    void set_successors(CFGMeta *);
     bool is_entry() { return entry; }
     bool is_exit() { return exit; }
     ProgramLoc * get_ploc(){ return ploc.get_line_min() ? &ploc : nullptr; }
     std::vector<InstructionMeta *> get_insts() { return insts; }
     std::vector<BasicBlockMeta *> get_pred_bbs() { return pred_bbs; }
     std::vector<BasicBlockMeta *> get_succ_bbs() { return succ_bbs; }
-
+    std::vector<std::string> get_def_vars() { return def_vars; }
+    std::vector<std::string> get_used_vars() { return used_vars; }
+    std::vector<std::string> get_used_funcs() { return used_funcs; }
+    void set_predecessors(CFGMeta *);
+    void set_successors(CFGMeta *);
 private:
+    void set_def_use_values();
     llvm::BasicBlock * bb;
     bool entry = false;
     bool exit = false;
@@ -91,6 +98,9 @@ private:
     std::vector<InstructionMeta *> insts;
     std::vector<BasicBlockMeta *> pred_bbs;
     std::vector<BasicBlockMeta *> succ_bbs;
+    std::vector<std::string> def_vars;
+    std::vector<std::string> used_vars;
+    std::vector<std::string> used_funcs;
 };
 
 class CFGMeta : public MetadataWrapper {

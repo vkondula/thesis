@@ -103,6 +103,11 @@ json JsonGen::get_basic_block_json(BasicBlockMeta * bb, bool recursive){
     for (std::vector<BasicBlockMeta *>::iterator it = bbs.begin(); it != bbs.end(); ++it){
         succ_bb.push_back((*it)->get_id());
     }
+    retval["def"] = bb->get_def_vars();
+    retval["use"] = bb->get_used_vars();
+    json metadata;
+    metadata["called_functions"] = bb->get_used_funcs();
+    retval["meta"] = metadata;
     retval["ploc"] = get_ploc_json(bb->get_ploc());
     return retval;
 }

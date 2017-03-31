@@ -12,7 +12,7 @@ int MetadataWrapper::gen_id() {
 int ModuleMeta::build() {
     built = true;
     id = MetadataWrapper::gen_id();
-    for (llvm::Module::iterator fce = this->module->begin(), end = this->module->end(); fce!=end; fce++){
+    for (llvm::Module::iterator fce = module->begin(), end = module->end(); fce!=end; fce++){
         if (!&*fce) continue;
         CFGMeta * cfg = new CFGMeta(&*fce);
         if (int retval = cfg->build()){
@@ -29,7 +29,7 @@ int CFGMeta::build() {
     built = true;
     id = MetadataWrapper::gen_id();
     // 1st iteration... Create BB(generate id) and Instruction
-    for (llvm::Function::iterator bb = this->fce->begin(), end = this->fce->end(); bb!=end; bb++){
+    for (llvm::Function::iterator bb = fce->begin(), end = fce->end(); bb!=end; bb++){
         if (!&*bb) continue;
         BasicBlockMeta * basic_block = new BasicBlockMeta(&*bb);
         if (int retval = basic_block->build()){
@@ -69,7 +69,7 @@ void CFGMeta::add_bb(llvm::BasicBlock * bb, BasicBlockMeta * meta){
 int BasicBlockMeta::build() {
     built = true;
     id = MetadataWrapper::gen_id();
-    for (llvm::BasicBlock::iterator inst = this->bb->begin(), end = this->bb->end(); inst!=end; inst++){
+    for (llvm::BasicBlock::iterator inst = bb->begin(), end = bb->end(); inst!=end; inst++){
         if (!&*inst) continue;
         InstructionMeta * instruction = new InstructionMeta(&*inst);
         if (int retval = instruction->build()){
@@ -80,6 +80,7 @@ int BasicBlockMeta::build() {
         // Get BasicBlock program location
         if (ProgramLoc * inst_ploc = instruction->get_ploc())
             ploc.merge(inst_ploc);
+        set_def_use_values();
     }
     return 0;
 }
@@ -102,6 +103,33 @@ void BasicBlockMeta::set_successors(CFGMeta * cfg){
     }
 }
 
+void BasicBlockMeta::set_def_use_values(){
+    for (std::vector<InstructionMeta *>::iterator it = insts.begin(); it != insts.end(); ++it) {
+        std::vector<llvm::Value *>operands = (*it)->get_operands();
+        for (std::vector<llvm::Value *>::iterator val = operands.begin(); val != operands.end(); ++val){
+            if ((*val)->hasName()){
+                std::size_t debug = (*it)->get_raw_llvm().find("llvm.dbg");
+                if (debug != std::string::npos) continue; // remove debug information
+                std::cerr << "===========\n";
+                std::cerr << (*val)->getName().str() << "\n";
+                llvm::Type * type = (*val)->getType();
+                std::cerr << (*it)->get_raw_llvm() << "\n";
+                type->dump();
+                std::string name = (*val)->getName().str();
+                if(type->isFunctionTy()){
+                    used_funcs.push_back(name);
+                } else {
+                    used_vars.push_back(name);
+                }
+            }
+        }
+        std::string defined =(*it)->get_defined_variable();
+        if (!defined.empty()){
+            def_vars.push_back(defined);
+        }
+    }
+}
+
 int InstructionMeta::build() {
     built = true;
     id = MetadataWrapper::gen_id();
@@ -111,7 +139,21 @@ int InstructionMeta::build() {
         if (ploc->build()) return 1;
     }
     // Transfer llvm::Instruction to human readable form
-    raw_llvm = this->get_inst_string();
+    raw_llvm = get_inst_string();
+    // Get defined variable, if any
+    unsigned int ops_count = inst->getNumOperands();
+    if(inst->getOpcode() == llvm::Instruction::Store){
+        if (!inst->getOperand(1)->hasName()) return 0;
+        char c = inst->getOperand(1)->getName().str().at(0);
+        if (isdigit(c)) return 0; // Temporary variables start with digit
+        defined_variable = inst->getOperand(1)->getName().str();
+        ops_count--;
+    }
+    // Get operands
+    for(unsigned int i = 0; i < ops_count; i++){
+        llvm::Value * op = inst->getOperand(i);
+        operands.push_back(op);
+    }
     return 0;
 }
 
