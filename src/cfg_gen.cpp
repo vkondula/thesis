@@ -12,6 +12,7 @@ int MetadataWrapper::gen_id() {
 int ModuleMeta::build() {
     built = true;
     id = MetadataWrapper::gen_id();
+    // build funcions (cfgs) in module
     for (llvm::Module::iterator fce = module->begin(), end = module->end(); fce!=end; fce++){
         if (!&*fce) continue;
         CFGMeta * cfg = new CFGMeta(&*fce);
@@ -21,6 +22,13 @@ int ModuleMeta::build() {
         }
         cfgs.push_back(cfg);
     }
+    // get global variables
+    for (llvm::Module::global_iterator var = module->global_begin(), end = module->global_end(); var!=end; var++){
+        if (!&*var) continue;
+        std::cerr << "========\n";
+        (&*var)->dump();
+    }
+    // get dependant modules
     return 0;
 }
 
@@ -28,6 +36,10 @@ int ModuleMeta::build() {
 int CFGMeta::build() {
     built = true;
     id = MetadataWrapper::gen_id();
+    if(fce->hasName()){
+        name = fce->getName().str();
+    }
+
     // 1st iteration... Create BB(generate id) and Instruction
     for (llvm::Function::iterator bb = fce->begin(), end = fce->end(); bb!=end; bb++){
         if (!&*bb) continue;

@@ -3,6 +3,7 @@
 
 #include "external_lib/json.hpp"
 #include "cfg_gen.hpp"
+#include <vector>
 
 using json = nlohmann::json;
 

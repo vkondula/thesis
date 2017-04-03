@@ -118,12 +118,14 @@ public:
     int build();
     BasicBlockMeta * find_bb(llvm::BasicBlock *);
     void add_bb(llvm::BasicBlock *, BasicBlockMeta *);
+    std::string get_name() { return name; }
     std::vector<BasicBlockMeta *> get_bbs() { return bb_objs; }
     std::vector<BasicBlockMeta *> get_init_bbs() { return init_bbs; }
     std::vector<BasicBlockMeta *> get_fini_bbs() { return fini_bbs; }
 
 private:
     llvm::Function * fce;
+    std::string name = "";
     std::map<llvm::BasicBlock *, BasicBlockMeta *> bbs_meta;
     std::vector<BasicBlockMeta *> bb_objs;
     std::vector<BasicBlockMeta *> init_bbs;
