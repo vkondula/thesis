@@ -5,6 +5,7 @@
 #include <llvm/IR/Module.h>
 #include <llvm/IR/DebugLoc.h>
 #include <llvm/IR/DebugInfoMetadata.h>
+#include <llvm/IR/Instructions.h>
 #include <llvm/Support/raw_ostream.h>
 #include "main.hpp"
 
@@ -55,6 +56,7 @@ public:
     int build();
     ProgramLoc * get_ploc(){ return ploc; }
     std::string get_raw_llvm(){ return raw_llvm; }
+    llvm::Instruction * get_inst(){ return inst; }
     std::vector<llvm::Value *> get_operands() { return operands; }
     std::string get_defined_variable() { return defined_variable; }
 

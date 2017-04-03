@@ -62,7 +62,7 @@ $(info -----------------------------------------------)
 # not support (for example '-Wcovered-switch-default'). If you run into this
 # problem, build with CXX set to a modern clang++ binary instead of g++.
 CXX := g++
-CXXFLAGS := -fno-rtti -O0 -g
+CXXFLAGS := -O0 -g
 
 LLVM_CXXFLAGS := `llvm-config --cxxflags | sed 's/ \-W[-a-zA-Z]*//g' | sed 's/ -pedantic//' | sed 's/ -fno-exceptions//'`
 LLVM_LDFLAGS := `llvm-config --ldflags --libs --system-libs`

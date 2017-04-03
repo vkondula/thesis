@@ -106,26 +106,32 @@ void BasicBlockMeta::set_successors(CFGMeta * cfg){
 void BasicBlockMeta::set_def_use_values(){
     for (std::vector<InstructionMeta *>::iterator it = insts.begin(); it != insts.end(); ++it) {
         std::vector<llvm::Value *>operands = (*it)->get_operands();
+        // remove debug information
+        if ((*it)->get_raw_llvm().find("llvm.dbg") != std::string::npos) continue;
+        // If instruction == call, save function name and remove it from operands
+        if(llvm::CallInst * call_inst = dynamic_cast<llvm::CallInst *>((*it)->get_inst())){
+            llvm::Function *fce = call_inst->getCalledFunction();
+            if(fce->hasName()){
+                std::string name = fce->getName().str();
+                if (std::find(used_funcs.begin(), used_funcs.end(), name) == used_funcs.end())
+                    used_funcs.push_back(fce->getName().str());
+            }
+
+        }
+        // Iter over operands
         for (std::vector<llvm::Value *>::iterator val = operands.begin(); val != operands.end(); ++val){
             if ((*val)->hasName()){
-                std::size_t debug = (*it)->get_raw_llvm().find("llvm.dbg");
-                if (debug != std::string::npos) continue; // remove debug information
-                std::cerr << "===========\n";
-                std::cerr << (*val)->getName().str() << "\n";
-                llvm::Type * type = (*val)->getType();
-                std::cerr << (*it)->get_raw_llvm() << "\n";
-                type->dump();
                 std::string name = (*val)->getName().str();
-                if(type->isFunctionTy()){
-                    used_funcs.push_back(name);
-                } else {
+                // remove function names
+                if (std::find(used_funcs.begin(), used_funcs.end(), name) != used_funcs.end()) continue;
+                if (std::find(used_vars.begin(), used_vars.end(), name) == used_vars.end())
                     used_vars.push_back(name);
-                }
             }
         }
         std::string defined =(*it)->get_defined_variable();
         if (!defined.empty()){
-            def_vars.push_back(defined);
+            if (std::find(def_vars.begin(), def_vars.end(), defined) == def_vars.end())
+                def_vars.push_back(defined);
         }
     }
 }
