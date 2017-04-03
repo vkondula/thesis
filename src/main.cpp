@@ -39,6 +39,7 @@ int main(int argc, const char **argv) {
 		OptionsParser.getCompilations(),
         OptionsParser.getSourcePathList()
 	);
+    Tool.appendArgumentsAdjuster(getInsertArgumentAdjuster("-g", ArgumentInsertPosition::END));
     std::cout << "It's nothing!\n";
     return Tool.run(newFrontendActionFactory<EmitMetadataAction>().get());
 }
