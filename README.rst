@@ -42,10 +42,10 @@ example:
 TODOs:
 ------
 
-    - make flags ``-O0 -g`` implicit
     - specify output stream
     - allow tool to get cmd line parameters
     - add help to tool
+
 
 DONE:
 -----
@@ -59,3 +59,20 @@ DONE:
     - propagate ``ploc`` to BB and CFG
     - entry and exit points in CFG
     - successors and predecessors
+
+22.3 - 28.3
+
+    - refactoring - split cfg gen and output
+    - def / use (part 1)
+
+29.3 - 4.4.
+
+    - def / use of variables in bb
+    - called function in bb (in metadata)
+    - make argument "-g" adding debug info implicit
+    - docker (fail)
+    - change json to new schema
+
+discuss:
+    - docker
+    - format for global variables
