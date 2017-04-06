@@ -68,11 +68,11 @@ json JsonGen::get_cfg_json(CFGMeta * cfg, bool recursive){
     json fini_bb = json::array();
     std::vector<BasicBlockMeta *> bbs = cfg->get_init_bbs();
     for (std::vector<BasicBlockMeta *>::iterator it = bbs.begin(); it != bbs.end(); ++it){
-        init_bb.push_back((*it)->get_id());
+        init_bb.push_back(std::to_string((*it)->get_id()));
     }
     bbs = cfg->get_fini_bbs();
     for (std::vector<BasicBlockMeta *>::iterator it = bbs.begin(); it != bbs.end(); ++it){
-        fini_bb.push_back((*it)->get_id());
+        fini_bb.push_back(std::to_string((*it)->get_id()));
     }
     std::string name = cfg->get_name();
     if (!name.empty()){
@@ -103,14 +103,16 @@ json JsonGen::get_basic_block_json(BasicBlockMeta * bb, bool recursive){
     json succ_bb = json::array();
     std::vector<BasicBlockMeta *> bbs = bb->get_pred_bbs();
     for (std::vector<BasicBlockMeta *>::iterator it = bbs.begin(); it != bbs.end(); ++it){
-        pred_bb.push_back((*it)->get_id());
+        pred_bb.push_back(std::to_string((*it)->get_id()));
     }
     bbs = bb->get_succ_bbs();
     for (std::vector<BasicBlockMeta *>::iterator it = bbs.begin(); it != bbs.end(); ++it){
-        succ_bb.push_back((*it)->get_id());
+        succ_bb.push_back(std::to_string((*it)->get_id()));
     }
     retval["def"] = bb->get_def_vars();
     retval["use"] = bb->get_used_vars();
+    retval["pred"] = pred_bb;
+    retval["succ"] = succ_bb;
     json metadata;
     metadata["called_functions"] = bb->get_used_funcs();
     retval["meta"] = metadata;
