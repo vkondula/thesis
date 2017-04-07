@@ -81,6 +81,9 @@ void CFGMeta::add_bb(llvm::BasicBlock * bb, BasicBlockMeta * meta){
 int BasicBlockMeta::build() {
     built = true;
     id = MetadataWrapper::gen_id();
+    // Get label for basic block
+    label = create_label_string();
+    // Get instructions in a basic block
     for (llvm::BasicBlock::iterator inst = bb->begin(), end = bb->end(); inst!=end; inst++){
         if (!&*inst) continue;
         InstructionMeta * instruction = new InstructionMeta(&*inst);
@@ -148,29 +151,43 @@ void BasicBlockMeta::set_def_use_values(){
     }
 }
 
+std::string BasicBlockMeta::create_label_string(){
+    // create raw_stream to print instruction into
+    std::string raw_instruction;
+    llvm::raw_string_ostream debug_stream(raw_instruction);
+    bb->printAsOperand(debug_stream, false);
+    // flush stream to string
+    debug_stream.flush();
+    // instruction contains leading whitespaces, remove it
+    raw_instruction.erase(0, raw_instruction.find_first_not_of(" \t\n\r\f\v"));
+    return raw_instruction;
+}
+
 int InstructionMeta::build() {
     built = true;
     id = MetadataWrapper::gen_id();
-    // Handle debug location
-    if (llvm::DebugLoc debud_loc = inst->getDebugLoc()){
-        ploc = new ProgramLoc(inst->getDebugLoc());
-        if (ploc->build()) return 1;
-    }
     // Transfer llvm::Instruction to human readable form
     raw_llvm = get_inst_string();
-    // Get defined variable, if any
-    unsigned int ops_count = inst->getNumOperands();
-    if(inst->getOpcode() == llvm::Instruction::Store){
-        if (!inst->getOperand(1)->hasName()) return 0;
-        char c = inst->getOperand(1)->getName().str().at(0);
-        if (isdigit(c)) return 0; // Temporary variables start with digit
-        defined_variable = inst->getOperand(1)->getName().str();
-        ops_count--;
-    }
-    // Get operands
-    for(unsigned int i = 0; i < ops_count; i++){
-        llvm::Value * op = inst->getOperand(i);
-        operands.push_back(op);
+    if(llvm::Instruction * instruction = dynamic_cast<llvm::Instruction *>(value)){
+        // Handle debug location
+        if (llvm::DebugLoc debud_loc = instruction->getDebugLoc()){
+            ploc = new ProgramLoc(instruction->getDebugLoc());
+            if (ploc->build()) return 1;
+        }
+        // Get defined variable, if any
+        unsigned int ops_count = instruction->getNumOperands();
+        if(instruction->getOpcode() == llvm::Instruction::Store){
+            if (!instruction->getOperand(1)->hasName()) return 0;
+            char c = instruction->getOperand(1)->getName().str().at(0);
+            if (isdigit(c)) return 0; // Temporary variables start with digit
+            defined_variable = instruction->getOperand(1)->getName().str();
+            ops_count--;
+        }
+        // Get operands
+        for(unsigned int i = 0; i < ops_count; i++){
+            llvm::Value * op = instruction->getOperand(i);
+            operands.push_back(op);
+        }
     }
     return 0;
 }
@@ -179,7 +196,7 @@ std::string InstructionMeta::get_inst_string(){
     // create raw_stream to print instruction into
     std::string raw_instruction;
     llvm::raw_string_ostream debug_stream(raw_instruction);
-    inst->print(debug_stream, false);
+    value->print(debug_stream, false);
     // flush stream to string
     debug_stream.flush();
     // instruction contains leading whitespaces, remove it

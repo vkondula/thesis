@@ -82,7 +82,6 @@ json JsonGen::get_cfg_json(CFGMeta * cfg, bool recursive){
     }
     retval["initBB"] = init_bb;
     retval["finiBB"] = fini_bb;
-    // TODO: files
     return retval;
 }
 
@@ -92,6 +91,10 @@ json JsonGen::get_basic_block_json(BasicBlockMeta * bb, bool recursive){
     retval["instructions"] = nullptr;
     if (recursive) {
         json insts_json = json::array();
+        json label;
+        label["llvm_raw"] = "; <label>:" + bb->get_label_string();
+        label["ploc"] = nullptr;
+        insts_json.push_back(label);
         std::vector<InstructionMeta *> insts = bb->get_insts();
         for (std::vector<InstructionMeta *>::iterator it = insts.begin(); it != insts.end(); ++it) {
             json inst = get_instruction_json(*it);
@@ -115,6 +118,7 @@ json JsonGen::get_basic_block_json(BasicBlockMeta * bb, bool recursive){
     retval["succ"] = succ_bb;
     json metadata;
     metadata["called_functions"] = bb->get_used_funcs();
+    metadata["label_name"] = bb->get_label_string();
     retval["meta"] = metadata;
     retval["ploc"] = get_ploc_json(bb->get_ploc());
     return retval;

@@ -40,6 +40,5 @@ int main(int argc, const char **argv) {
         OptionsParser.getSourcePathList()
 	);
     Tool.appendArgumentsAdjuster(getInsertArgumentAdjuster("-g", ArgumentInsertPosition::END));
-    std::cout << "It's nothing!\n";
     return Tool.run(newFrontendActionFactory<EmitMetadataAction>().get());
 }

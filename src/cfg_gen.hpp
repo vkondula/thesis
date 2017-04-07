@@ -47,8 +47,8 @@ private:
 
 class InstructionMeta : public MetadataWrapper {
 public:
-    InstructionMeta(llvm::Instruction * inst){
-        this->inst = inst;
+    InstructionMeta(llvm::Value * inst){
+        this->value = inst;
     }
     ~InstructionMeta(){
         if (ploc) delete ploc;
@@ -56,13 +56,13 @@ public:
     int build();
     ProgramLoc * get_ploc(){ return ploc; }
     std::string get_raw_llvm(){ return raw_llvm; }
-    llvm::Instruction * get_inst(){ return inst; }
+    llvm::Value * get_inst(){ return value; }
     std::vector<llvm::Value *> get_operands() { return operands; }
     std::string get_defined_variable() { return defined_variable; }
 
 private:
     std::string get_inst_string();
-    llvm::Instruction * inst;
+    llvm::Value * value;
     ProgramLoc * ploc = nullptr;
     std::string raw_llvm;
     std::vector<llvm::Value *> operands;
@@ -89,6 +89,7 @@ public:
     std::vector<std::string> get_def_vars() { return def_vars; }
     std::vector<std::string> get_used_vars() { return used_vars; }
     std::vector<std::string> get_used_funcs() { return used_funcs; }
+    std::string get_label_string() { return label; }
     void set_predecessors(CFGMeta *);
     void set_successors(CFGMeta *);
 private:
@@ -97,6 +98,8 @@ private:
     bool entry = false;
     bool exit = false;
     ProgramLoc ploc = ProgramLoc(nullptr);
+    std::string label = "";
+    std::string create_label_string();
     std::vector<InstructionMeta *> insts;
     std::vector<BasicBlockMeta *> pred_bbs;
     std::vector<BasicBlockMeta *> succ_bbs;
