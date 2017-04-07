@@ -48,6 +48,14 @@ json JsonGen::get_module_json(ModuleMeta * module, bool recursive){
         }
         retval["cfgs"] = cfgs_json;
     }
+    json variables_json = json::array();
+    std::vector<InstructionMeta *> vars = module->get_global_vars();
+    // Iter over global variables
+    for (std::vector<InstructionMeta *>::iterator it = vars.begin(); it != vars.end(); ++it){
+        json cfg = get_instruction_json(*it);
+        variables_json.push_back(cfg);
+    }
+    retval["global_vars"] = variables_json;
     return retval;
 }
 

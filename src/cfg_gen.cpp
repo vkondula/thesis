@@ -25,10 +25,10 @@ int ModuleMeta::build() {
     // get global variables
     for (llvm::Module::global_iterator var = module->global_begin(), end = module->global_end(); var!=end; var++){
         if (!&*var) continue;
-        std::cerr << "========\n";
-        (&*var)->dump();
+        InstructionMeta * cfg = new InstructionMeta(&*var);
+        if (int retval = cfg->build()) return retval;
+        global_vars.push_back(cfg);
     }
-    // get dependant modules
     return 0;
 }
 

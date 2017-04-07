@@ -76,7 +76,4 @@ DONE:
 5.4. - 11.4
 
     - add label to basic block
-
-discuss:
-    - docker
-    - format for global variables
+    - add global variables

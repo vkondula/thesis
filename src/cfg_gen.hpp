@@ -3,7 +3,9 @@
 
 #include <map>
 #include <llvm/IR/Module.h>
+#include <llvm/IR/Constant.h>
 #include <llvm/IR/DebugLoc.h>
+#include <llvm/IR/GlobalVariable.h>
 #include <llvm/IR/DebugInfoMetadata.h>
 #include <llvm/IR/Instructions.h>
 #include <llvm/Support/raw_ostream.h>
@@ -147,10 +149,12 @@ public:
     }
     int build();
     std::vector<CFGMeta *> get_cfgs() { return cfgs; }
+    std::vector<InstructionMeta *> get_global_vars() { return global_vars; }
 
 private:
     llvm::Module * module;
     std::vector<CFGMeta *> cfgs;
+    std::vector<InstructionMeta *> global_vars;
 };
 
 #endif //PROJECT_JSONGEN_H
