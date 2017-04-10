@@ -19,7 +19,6 @@ std::string JsonGen::get_output() {
 }
 
 int JsonGen::build(ModuleMeta * module){
-    std::cerr << "got_it" << "\n";
     if (!module) {
         scope = nullptr;
         return 0;

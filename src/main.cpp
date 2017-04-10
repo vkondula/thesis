@@ -5,7 +5,7 @@ using namespace llvm;
 
 // Apply a custom category to all command-line options so that they are the
 // only ones displayed.
-static cl::OptionCategory MyToolCategory("my-tool options");
+static cl::OptionCategory MyToolCategory("Control flow graph extractor");
 
 // CommonOptionsParser declares HelpMessage with a description of the common
 // command-line options related to the compilation database and input files.
@@ -13,7 +13,12 @@ static cl::OptionCategory MyToolCategory("my-tool options");
 static cl::extrahelp CommonHelp(CommonOptionsParser::HelpMessage);
 
 // A help message for this specific tool can be added afterwards.
-static cl::extrahelp MoreHelp("\nMore help text...");
+static cl::extrahelp MoreHelp(
+        "\nClang options:\n\n"
+        "   Parameters for the compilation are divided\n"
+        "   from tool options by two dashes\n"
+        "   Example: cfg-gen --json tests/test1.cpp -- -std=c++14\n"
+);
 
 // Callback at the end of Generating LLVM IR code
 // Allows to access llvm::Module
@@ -27,7 +32,6 @@ void EmitMetadataAction::EndSourceFileAction(){
     // Print to set output stream (stdout) in set format (json)
     FormatFactory factory;
     Formater * formater = factory.getFormatGen(format);
-    std::cerr << "It's something!" << format << "\n";
     formater->build(&mod);
     std::cout << formater->get_output();
 }

@@ -1,5 +1,7 @@
 #include <stdio.h>
 
+int a;
+
 int mul(int a, int b){
 	/* the worst mul function ever*/
 	if (b) {
@@ -11,7 +13,7 @@ int mul(int a, int b){
 int main() {
    /* my first program in C */
    printf("Hello, World! \n");
-   int a = mul(3,4);
+   a = mul(3,4);
    if (a>3){
        printf("so unexpected!");
    }

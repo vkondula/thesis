@@ -1,9 +1,15 @@
 #include "cfg_gen.hpp"
-
 /*
- * Shared counter for all object inheriting from MetadataWrapper
- * Allows referencing between objects and adds unique identifier
+ * Extract data from clang and llvm
+ *
+ * Information about control flow graphs, basic blocks and instructions
+ * is extracted from clang and llvm. processed and stored.
  */
+
+
+// Shared counter for all object inheriting from MetadataWrapper
+// Allows referencing between objects and adds unique identifier
+
 int MetadataWrapper::id_counter = 1;
 int MetadataWrapper::gen_id() {
     return id_counter++;
@@ -209,6 +215,8 @@ int ProgramLoc::build() {
     id = MetadataWrapper::gen_id();
     if (!loc){
         // MISSING DEBUG INFO
+        // All the indirectly create instruction like aloc don't have
+        // debug information
         return 0;
     }
     // More advanced debug information
@@ -222,6 +230,8 @@ int ProgramLoc::build() {
     return 0;
 }
 
+// Combine program locations of instruction together
+// to get Basic Block location
 void ProgramLoc::merge(ProgramLoc * new_loc) {
     // copy one to another (initialize)
     if(!built) {
