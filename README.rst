@@ -76,4 +76,8 @@ DONE:
 5.4. - 11.4
 
     - add label to basic block
+    - add more metadata
     - add global variables
+    - add help and description
+    - create docker image
+    - update instalation instruction
