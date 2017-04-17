@@ -132,7 +132,7 @@ void BasicBlockMeta::set_def_use_values(){
         // If instruction == call, save function name and remove it from operands
         if(llvm::CallInst * call_inst = dynamic_cast<llvm::CallInst *>((*it)->get_inst())){
             llvm::Function *fce = call_inst->getCalledFunction();
-            if(fce->hasName()){
+            if(fce && fce->hasName()){
                 std::string name = fce->getName().str();
                 if (std::find(used_funcs.begin(), used_funcs.end(), name) == used_funcs.end())
                     used_funcs.push_back(fce->getName().str());
