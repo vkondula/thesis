@@ -3,15 +3,13 @@
 // Factory for output generator in specific format
 // For now only JSON is available
 Formater * FormatFactory::getFormatGen(std::string format){
+    // set default json
+    if (format.empty()) format = "json";
     if (format.compare("json") == 0){
         return new JsonGen();
     } else {
         return nullptr;
     }
-}
-
-void Formater::set_stream(FILE *) {
-    // TODO
 }
 
 std::string JsonGen::get_output() {
@@ -27,7 +25,7 @@ int JsonGen::build(ModuleMeta * module){
         scope = get_module_json(module, true);
     }
     catch (...) {
-        std::cout << "Build failed";
+        std::cerr << "Build failed";
         return 1;
     }
     return 0;

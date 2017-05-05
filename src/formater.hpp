@@ -15,7 +15,6 @@ class ProgramLoc;
 
 class Formater {
 public:
-    void set_stream(FILE *);
     virtual int build(ModuleMeta *) = 0;
     virtual std::string get_output() = 0;
 };
