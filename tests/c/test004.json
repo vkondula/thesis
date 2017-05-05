@@ -1,0 +1,142 @@
+{
+    "cfgs": [
+        {
+            "basic_blocks": [
+                {
+                    "def": [
+                        "b"
+                    ],
+                    "id": "3",
+                    "instructions": [
+                        {
+                            "llvm_raw": "; <label>:%0",
+                            "ploc": null
+                        },
+                        {
+                            "ploc": null,
+                            "raw_llvm": "%1 = alloca float, align 4"
+                        },
+                        {
+                            "ploc": null,
+                            "raw_llvm": "%b = alloca float, align 4"
+                        },
+                        {
+                            "ploc": null,
+                            "raw_llvm": "store float %a, float* %1, align 4"
+                        },
+                        {
+                            "ploc": {
+                                "col_begin": 17,
+                                "line_min": 1,
+                                "source_file": "/home/vkondula/code/thesis/tests/c/test004.c"
+                            },
+                            "raw_llvm": "call void @llvm.dbg.declare(metadata float* %1, metadata !11, metadata !12), !dbg !13"
+                        },
+                        {
+                            "ploc": {
+                                "col_begin": 11,
+                                "line_min": 2,
+                                "source_file": "/home/vkondula/code/thesis/tests/c/test004.c"
+                            },
+                            "raw_llvm": "call void @llvm.dbg.declare(metadata float* %b, metadata !14, metadata !12), !dbg !15"
+                        },
+                        {
+                            "ploc": {
+                                "col_begin": 15,
+                                "line_min": 2,
+                                "source_file": "/home/vkondula/code/thesis/tests/c/test004.c"
+                            },
+                            "raw_llvm": "%2 = load float, float* %1, align 4, !dbg !16"
+                        },
+                        {
+                            "ploc": {
+                                "col_begin": 15,
+                                "line_min": 2,
+                                "source_file": "/home/vkondula/code/thesis/tests/c/test004.c"
+                            },
+                            "raw_llvm": "%3 = fpext float %2 to double, !dbg !16"
+                        },
+                        {
+                            "ploc": {
+                                "col_begin": 17,
+                                "line_min": 2,
+                                "source_file": "/home/vkondula/code/thesis/tests/c/test004.c"
+                            },
+                            "raw_llvm": "%4 = fadd double %3, 1.000000e+00, !dbg !17"
+                        },
+                        {
+                            "ploc": {
+                                "col_begin": 15,
+                                "line_min": 2,
+                                "source_file": "/home/vkondula/code/thesis/tests/c/test004.c"
+                            },
+                            "raw_llvm": "%5 = fptrunc double %4 to float, !dbg !16"
+                        },
+                        {
+                            "ploc": {
+                                "col_begin": 11,
+                                "line_min": 2,
+                                "source_file": "/home/vkondula/code/thesis/tests/c/test004.c"
+                            },
+                            "raw_llvm": "store float %5, float* %b, align 4, !dbg !15"
+                        },
+                        {
+                            "ploc": {
+                                "col_begin": 12,
+                                "line_min": 3,
+                                "source_file": "/home/vkondula/code/thesis/tests/c/test004.c"
+                            },
+                            "raw_llvm": "%6 = load float, float* %b, align 4, !dbg !18"
+                        },
+                        {
+                            "ploc": {
+                                "col_begin": 5,
+                                "line_min": 3,
+                                "source_file": "/home/vkondula/code/thesis/tests/c/test004.c"
+                            },
+                            "raw_llvm": "ret float %6, !dbg !19"
+                        }
+                    ],
+                    "meta": {
+                        "called_functions": [],
+                        "label_name": "%0"
+                    },
+                    "ploc": {
+                        "col_begin": 17,
+                        "col_end": 12,
+                        "line_max": 3,
+                        "line_min": 1,
+                        "source_file": "/home/vkondula/code/thesis/tests/c/test004.c"
+                    },
+                    "pred": [],
+                    "succ": [],
+                    "use": [
+                        "a",
+                        "b"
+                    ]
+                }
+            ],
+            "finiBB": [
+                "3"
+            ],
+            "id": "2",
+            "initBB": [
+                "3"
+            ],
+            "meta": {
+                "name": "foo"
+            }
+        },
+        {
+            "basic_blocks": [],
+            "finiBB": [],
+            "id": "26",
+            "initBB": [],
+            "meta": {
+                "name": "llvm.dbg.declare"
+            }
+        }
+    ],
+    "global_vars": [],
+    "id": "1"
+}

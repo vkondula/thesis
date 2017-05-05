@@ -1,0 +1,558 @@
+{
+    "cfgs": [
+        {
+            "basic_blocks": [
+                {
+                    "def": [],
+                    "id": "3",
+                    "instructions": [
+                        {
+                            "llvm_raw": "; <label>:%0",
+                            "ploc": null
+                        },
+                        {
+                            "ploc": null,
+                            "raw_llvm": "%1 = alloca i32, align 4"
+                        },
+                        {
+                            "ploc": null,
+                            "raw_llvm": "%b = alloca %class.A*, align 8"
+                        },
+                        {
+                            "ploc": null,
+                            "raw_llvm": "%2 = alloca i8*"
+                        },
+                        {
+                            "ploc": null,
+                            "raw_llvm": "%3 = alloca i32"
+                        },
+                        {
+                            "ploc": null,
+                            "raw_llvm": "store i32 %a, i32* %1, align 4"
+                        },
+                        {
+                            "ploc": {
+                                "col_begin": 13,
+                                "line_min": 10,
+                                "source_file": "/home/vkondula/code/thesis/tests/cpp/test031.cpp"
+                            },
+                            "raw_llvm": "call void @llvm.dbg.declare(metadata i32* %1, metadata !24, metadata !25), !dbg !26"
+                        },
+                        {
+                            "ploc": {
+                                "col_begin": 9,
+                                "line_min": 11,
+                                "source_file": "/home/vkondula/code/thesis/tests/cpp/test031.cpp"
+                            },
+                            "raw_llvm": "call void @llvm.dbg.declare(metadata %class.A** %b, metadata !27, metadata !25), !dbg !29"
+                        },
+                        {
+                            "ploc": {
+                                "col_begin": 13,
+                                "line_min": 11,
+                                "source_file": "/home/vkondula/code/thesis/tests/cpp/test031.cpp"
+                            },
+                            "raw_llvm": "%4 = call noalias i8* @_Znwm(i64 4) #5, !dbg !30"
+                        },
+                        {
+                            "ploc": {
+                                "col_begin": 13,
+                                "line_min": 11,
+                                "source_file": "/home/vkondula/code/thesis/tests/cpp/test031.cpp"
+                            },
+                            "raw_llvm": "%5 = bitcast i8* %4 to %class.A*, !dbg !30"
+                        },
+                        {
+                            "ploc": {
+                                "col_begin": 19,
+                                "line_min": 11,
+                                "source_file": "/home/vkondula/code/thesis/tests/cpp/test031.cpp"
+                            },
+                            "raw_llvm": "%6 = load i32, i32* %1, align 4, !dbg !31"
+                        },
+                        {
+                            "ploc": {
+                                "col_begin": 17,
+                                "line_min": 11,
+                                "source_file": "/home/vkondula/code/thesis/tests/cpp/test031.cpp"
+                            },
+                            "raw_llvm": "invoke void @_ZN1AC2Ei(%class.A* %5, i32 %6)\n          to label %7 unwind label %10, !dbg !32"
+                        }
+                    ],
+                    "meta": {
+                        "called_functions": [
+                            "_Znwm"
+                        ],
+                        "label_name": "%0"
+                    },
+                    "ploc": {
+                        "col_begin": 13,
+                        "col_end": 19,
+                        "line_max": 11,
+                        "line_min": 10,
+                        "source_file": "/home/vkondula/code/thesis/tests/cpp/test031.cpp"
+                    },
+                    "pred": [],
+                    "succ": [
+                        "22",
+                        "32"
+                    ],
+                    "use": [
+                        "a",
+                        "_ZN1AC2Ei"
+                    ]
+                },
+                {
+                    "def": [
+                        "b"
+                    ],
+                    "id": "22",
+                    "instructions": [
+                        {
+                            "llvm_raw": "; <label>:%7",
+                            "ploc": null
+                        },
+                        {
+                            "ploc": {
+                                "col_begin": 9,
+                                "line_min": 11,
+                                "source_file": "/home/vkondula/code/thesis/tests/cpp/test031.cpp"
+                            },
+                            "raw_llvm": "store %class.A* %5, %class.A** %b, align 8, !dbg !33"
+                        },
+                        {
+                            "ploc": {
+                                "col_begin": 12,
+                                "line_min": 12,
+                                "source_file": "/home/vkondula/code/thesis/tests/cpp/test031.cpp"
+                            },
+                            "raw_llvm": "%8 = load %class.A*, %class.A** %b, align 8, !dbg !35"
+                        },
+                        {
+                            "ploc": {
+                                "col_begin": 12,
+                                "line_min": 12,
+                                "source_file": "/home/vkondula/code/thesis/tests/cpp/test031.cpp"
+                            },
+                            "raw_llvm": "%9 = call i32 @_ZN1A5get_aEv(%class.A* %8), !dbg !35"
+                        },
+                        {
+                            "ploc": {
+                                "col_begin": 5,
+                                "line_min": 12,
+                                "source_file": "/home/vkondula/code/thesis/tests/cpp/test031.cpp"
+                            },
+                            "raw_llvm": "ret i32 %9, !dbg !36"
+                        }
+                    ],
+                    "meta": {
+                        "called_functions": [
+                            "_ZN1A5get_aEv"
+                        ],
+                        "label_name": "%7"
+                    },
+                    "ploc": {
+                        "col_begin": 9,
+                        "col_end": 12,
+                        "line_max": 12,
+                        "line_min": 11,
+                        "source_file": "/home/vkondula/code/thesis/tests/cpp/test031.cpp"
+                    },
+                    "pred": [
+                        "3"
+                    ],
+                    "succ": [],
+                    "use": [
+                        "b"
+                    ]
+                },
+                {
+                    "def": [],
+                    "id": "32",
+                    "instructions": [
+                        {
+                            "llvm_raw": "; <label>:%10",
+                            "ploc": null
+                        },
+                        {
+                            "ploc": {
+                                "col_begin": 1,
+                                "line_min": 13,
+                                "source_file": "/home/vkondula/code/thesis/tests/cpp/test031.cpp"
+                            },
+                            "raw_llvm": "%11 = landingpad { i8*, i32 }\n          cleanup, !dbg !37"
+                        },
+                        {
+                            "ploc": {
+                                "col_begin": 1,
+                                "line_min": 13,
+                                "source_file": "/home/vkondula/code/thesis/tests/cpp/test031.cpp"
+                            },
+                            "raw_llvm": "%12 = extractvalue { i8*, i32 } %11, 0, !dbg !37"
+                        },
+                        {
+                            "ploc": {
+                                "col_begin": 1,
+                                "line_min": 13,
+                                "source_file": "/home/vkondula/code/thesis/tests/cpp/test031.cpp"
+                            },
+                            "raw_llvm": "store i8* %12, i8** %2, align 8, !dbg !37"
+                        },
+                        {
+                            "ploc": {
+                                "col_begin": 1,
+                                "line_min": 13,
+                                "source_file": "/home/vkondula/code/thesis/tests/cpp/test031.cpp"
+                            },
+                            "raw_llvm": "%13 = extractvalue { i8*, i32 } %11, 1, !dbg !37"
+                        },
+                        {
+                            "ploc": {
+                                "col_begin": 1,
+                                "line_min": 13,
+                                "source_file": "/home/vkondula/code/thesis/tests/cpp/test031.cpp"
+                            },
+                            "raw_llvm": "store i32 %13, i32* %3, align 4, !dbg !37"
+                        },
+                        {
+                            "ploc": {
+                                "col_begin": 13,
+                                "line_min": 11,
+                                "source_file": "/home/vkondula/code/thesis/tests/cpp/test031.cpp"
+                            },
+                            "raw_llvm": "call void @_ZdlPv(i8* %4) #6, !dbg !38"
+                        },
+                        {
+                            "ploc": {
+                                "col_begin": 13,
+                                "line_min": 11,
+                                "source_file": "/home/vkondula/code/thesis/tests/cpp/test031.cpp"
+                            },
+                            "raw_llvm": "br label %14, !dbg !38"
+                        }
+                    ],
+                    "meta": {
+                        "called_functions": [
+                            "_ZdlPv"
+                        ],
+                        "label_name": "%10"
+                    },
+                    "ploc": {
+                        "col_begin": 13,
+                        "col_end": 1,
+                        "line_max": 13,
+                        "line_min": 11,
+                        "source_file": "/home/vkondula/code/thesis/tests/cpp/test031.cpp"
+                    },
+                    "pred": [
+                        "3"
+                    ],
+                    "succ": [
+                        "48"
+                    ],
+                    "use": []
+                },
+                {
+                    "def": [],
+                    "id": "48",
+                    "instructions": [
+                        {
+                            "llvm_raw": "; <label>:%14",
+                            "ploc": null
+                        },
+                        {
+                            "ploc": {
+                                "col_begin": 13,
+                                "line_min": 11,
+                                "source_file": "/home/vkondula/code/thesis/tests/cpp/test031.cpp"
+                            },
+                            "raw_llvm": "%15 = load i8*, i8** %2, align 8, !dbg !40"
+                        },
+                        {
+                            "ploc": {
+                                "col_begin": 13,
+                                "line_min": 11,
+                                "source_file": "/home/vkondula/code/thesis/tests/cpp/test031.cpp"
+                            },
+                            "raw_llvm": "%16 = load i32, i32* %3, align 4, !dbg !40"
+                        },
+                        {
+                            "ploc": {
+                                "col_begin": 13,
+                                "line_min": 11,
+                                "source_file": "/home/vkondula/code/thesis/tests/cpp/test031.cpp"
+                            },
+                            "raw_llvm": "%17 = insertvalue { i8*, i32 } undef, i8* %15, 0, !dbg !40"
+                        },
+                        {
+                            "ploc": {
+                                "col_begin": 13,
+                                "line_min": 11,
+                                "source_file": "/home/vkondula/code/thesis/tests/cpp/test031.cpp"
+                            },
+                            "raw_llvm": "%18 = insertvalue { i8*, i32 } %17, i32 %16, 1, !dbg !40"
+                        },
+                        {
+                            "ploc": {
+                                "col_begin": 13,
+                                "line_min": 11,
+                                "source_file": "/home/vkondula/code/thesis/tests/cpp/test031.cpp"
+                            },
+                            "raw_llvm": "resume { i8*, i32 } %18, !dbg !40"
+                        }
+                    ],
+                    "meta": {
+                        "called_functions": [],
+                        "label_name": "%14"
+                    },
+                    "ploc": {
+                        "col_begin": 13,
+                        "line_min": 11,
+                        "source_file": "/home/vkondula/code/thesis/tests/cpp/test031.cpp"
+                    },
+                    "pred": [
+                        "32"
+                    ],
+                    "succ": [],
+                    "use": []
+                }
+            ],
+            "finiBB": [
+                "22",
+                "48"
+            ],
+            "id": "2",
+            "initBB": [
+                "3"
+            ],
+            "meta": {
+                "name": "_Z3fooi"
+            }
+        },
+        {
+            "basic_blocks": [],
+            "finiBB": [],
+            "id": "60",
+            "initBB": [],
+            "meta": {
+                "name": "llvm.dbg.declare"
+            }
+        },
+        {
+            "basic_blocks": [],
+            "finiBB": [],
+            "id": "61",
+            "initBB": [],
+            "meta": {
+                "name": "_Znwm"
+            }
+        },
+        {
+            "basic_blocks": [
+                {
+                    "def": [],
+                    "id": "63",
+                    "instructions": [
+                        {
+                            "llvm_raw": "; <label>:%0",
+                            "ploc": null
+                        },
+                        {
+                            "ploc": null,
+                            "raw_llvm": "%1 = alloca %class.A*, align 8"
+                        },
+                        {
+                            "ploc": null,
+                            "raw_llvm": "%2 = alloca i32, align 4"
+                        },
+                        {
+                            "ploc": null,
+                            "raw_llvm": "store %class.A* %this, %class.A** %1, align 8"
+                        },
+                        {
+                            "ploc": {
+                                "line_min": 0,
+                                "source_file": "/home/vkondula/code/thesis/tests/cpp/test031.cpp"
+                            },
+                            "raw_llvm": "call void @llvm.dbg.declare(metadata %class.A** %1, metadata !42, metadata !25), !dbg !43"
+                        },
+                        {
+                            "ploc": null,
+                            "raw_llvm": "store i32 %a, i32* %2, align 4"
+                        },
+                        {
+                            "ploc": {
+                                "col_begin": 11,
+                                "line_min": 4,
+                                "source_file": "/home/vkondula/code/thesis/tests/cpp/test031.cpp"
+                            },
+                            "raw_llvm": "call void @llvm.dbg.declare(metadata i32* %2, metadata !44, metadata !25), !dbg !45"
+                        },
+                        {
+                            "ploc": null,
+                            "raw_llvm": "%3 = load %class.A*, %class.A** %1, align 8"
+                        },
+                        {
+                            "ploc": {
+                                "col_begin": 19,
+                                "line_min": 5,
+                                "source_file": "/home/vkondula/code/thesis/tests/cpp/test031.cpp"
+                            },
+                            "raw_llvm": "%4 = load i32, i32* %2, align 4, !dbg !30"
+                        },
+                        {
+                            "ploc": {
+                                "col_begin": 21,
+                                "line_min": 5,
+                                "source_file": "/home/vkondula/code/thesis/tests/cpp/test031.cpp"
+                            },
+                            "raw_llvm": "%5 = add nsw i32 %4, 1, !dbg !32"
+                        },
+                        {
+                            "ploc": {
+                                "col_begin": 15,
+                                "line_min": 5,
+                                "source_file": "/home/vkondula/code/thesis/tests/cpp/test031.cpp"
+                            },
+                            "raw_llvm": "%6 = getelementptr inbounds %class.A, %class.A* %3, i32 0, i32 0, !dbg !33"
+                        },
+                        {
+                            "ploc": {
+                                "col_begin": 17,
+                                "line_min": 5,
+                                "source_file": "/home/vkondula/code/thesis/tests/cpp/test031.cpp"
+                            },
+                            "raw_llvm": "store i32 %5, i32* %6, align 4, !dbg !34"
+                        },
+                        {
+                            "ploc": {
+                                "col_begin": 5,
+                                "line_min": 6,
+                                "source_file": "/home/vkondula/code/thesis/tests/cpp/test031.cpp"
+                            },
+                            "raw_llvm": "ret void, !dbg !35"
+                        }
+                    ],
+                    "meta": {
+                        "called_functions": [],
+                        "label_name": "%0"
+                    },
+                    "ploc": null,
+                    "pred": [],
+                    "succ": [],
+                    "use": [
+                        "this",
+                        "a"
+                    ]
+                }
+            ],
+            "finiBB": [
+                "63"
+            ],
+            "id": "62",
+            "initBB": [
+                "63"
+            ],
+            "meta": {
+                "name": "_ZN1AC2Ei"
+            }
+        },
+        {
+            "basic_blocks": [],
+            "finiBB": [],
+            "id": "84",
+            "initBB": [],
+            "meta": {
+                "name": "__gxx_personality_v0"
+            }
+        },
+        {
+            "basic_blocks": [],
+            "finiBB": [],
+            "id": "85",
+            "initBB": [],
+            "meta": {
+                "name": "_ZdlPv"
+            }
+        },
+        {
+            "basic_blocks": [
+                {
+                    "def": [],
+                    "id": "87",
+                    "instructions": [
+                        {
+                            "llvm_raw": "; <label>:%0",
+                            "ploc": null
+                        },
+                        {
+                            "ploc": null,
+                            "raw_llvm": "%1 = alloca %class.A*, align 8"
+                        },
+                        {
+                            "ploc": null,
+                            "raw_llvm": "store %class.A* %this, %class.A** %1, align 8"
+                        },
+                        {
+                            "ploc": {
+                                "line_min": 0,
+                                "source_file": "/home/vkondula/code/thesis/tests/cpp/test031.cpp"
+                            },
+                            "raw_llvm": "call void @llvm.dbg.declare(metadata %class.A** %1, metadata !52, metadata !25), !dbg !53"
+                        },
+                        {
+                            "ploc": null,
+                            "raw_llvm": "%2 = load %class.A*, %class.A** %1, align 8"
+                        },
+                        {
+                            "ploc": {
+                                "col_begin": 24,
+                                "line_min": 7,
+                                "source_file": "/home/vkondula/code/thesis/tests/cpp/test031.cpp"
+                            },
+                            "raw_llvm": "%3 = getelementptr inbounds %class.A, %class.A* %2, i32 0, i32 0, !dbg !28"
+                        },
+                        {
+                            "ploc": {
+                                "col_begin": 24,
+                                "line_min": 7,
+                                "source_file": "/home/vkondula/code/thesis/tests/cpp/test031.cpp"
+                            },
+                            "raw_llvm": "%4 = load i32, i32* %3, align 4, !dbg !28"
+                        },
+                        {
+                            "ploc": {
+                                "col_begin": 17,
+                                "line_min": 7,
+                                "source_file": "/home/vkondula/code/thesis/tests/cpp/test031.cpp"
+                            },
+                            "raw_llvm": "ret i32 %4, !dbg !29"
+                        }
+                    ],
+                    "meta": {
+                        "called_functions": [],
+                        "label_name": "%0"
+                    },
+                    "ploc": null,
+                    "pred": [],
+                    "succ": [],
+                    "use": [
+                        "this"
+                    ]
+                }
+            ],
+            "finiBB": [
+                "87"
+            ],
+            "id": "86",
+            "initBB": [
+                "87"
+            ],
+            "meta": {
+                "name": "_ZN1A5get_aEv"
+            }
+        }
+    ],
+    "global_vars": [],
+    "id": "1"
+}

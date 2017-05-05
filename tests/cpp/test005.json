@@ -1,0 +1,126 @@
+{
+    "cfgs": [
+        {
+            "basic_blocks": [
+                {
+                    "def": [
+                        "b"
+                    ],
+                    "id": "3",
+                    "instructions": [
+                        {
+                            "llvm_raw": "; <label>:%0",
+                            "ploc": null
+                        },
+                        {
+                            "ploc": null,
+                            "raw_llvm": "%1 = alloca double, align 8"
+                        },
+                        {
+                            "ploc": null,
+                            "raw_llvm": "%b = alloca double, align 8"
+                        },
+                        {
+                            "ploc": null,
+                            "raw_llvm": "store double %a, double* %1, align 8"
+                        },
+                        {
+                            "ploc": {
+                                "col_begin": 19,
+                                "line_min": 1,
+                                "source_file": "/home/vkondula/code/thesis/tests/cpp/test005.cpp"
+                            },
+                            "raw_llvm": "call void @llvm.dbg.declare(metadata double* %1, metadata !11, metadata !12), !dbg !13"
+                        },
+                        {
+                            "ploc": {
+                                "col_begin": 12,
+                                "line_min": 2,
+                                "source_file": "/home/vkondula/code/thesis/tests/cpp/test005.cpp"
+                            },
+                            "raw_llvm": "call void @llvm.dbg.declare(metadata double* %b, metadata !14, metadata !12), !dbg !15"
+                        },
+                        {
+                            "ploc": {
+                                "col_begin": 16,
+                                "line_min": 2,
+                                "source_file": "/home/vkondula/code/thesis/tests/cpp/test005.cpp"
+                            },
+                            "raw_llvm": "%2 = load double, double* %1, align 8, !dbg !16"
+                        },
+                        {
+                            "ploc": {
+                                "col_begin": 18,
+                                "line_min": 2,
+                                "source_file": "/home/vkondula/code/thesis/tests/cpp/test005.cpp"
+                            },
+                            "raw_llvm": "%3 = fadd double %2, 1.000000e+00, !dbg !17"
+                        },
+                        {
+                            "ploc": {
+                                "col_begin": 12,
+                                "line_min": 2,
+                                "source_file": "/home/vkondula/code/thesis/tests/cpp/test005.cpp"
+                            },
+                            "raw_llvm": "store double %3, double* %b, align 8, !dbg !15"
+                        },
+                        {
+                            "ploc": {
+                                "col_begin": 12,
+                                "line_min": 3,
+                                "source_file": "/home/vkondula/code/thesis/tests/cpp/test005.cpp"
+                            },
+                            "raw_llvm": "%4 = load double, double* %b, align 8, !dbg !18"
+                        },
+                        {
+                            "ploc": {
+                                "col_begin": 5,
+                                "line_min": 3,
+                                "source_file": "/home/vkondula/code/thesis/tests/cpp/test005.cpp"
+                            },
+                            "raw_llvm": "ret double %4, !dbg !19"
+                        }
+                    ],
+                    "meta": {
+                        "called_functions": [],
+                        "label_name": "%0"
+                    },
+                    "ploc": {
+                        "col_begin": 19,
+                        "col_end": 12,
+                        "line_max": 3,
+                        "line_min": 1,
+                        "source_file": "/home/vkondula/code/thesis/tests/cpp/test005.cpp"
+                    },
+                    "pred": [],
+                    "succ": [],
+                    "use": [
+                        "a",
+                        "b"
+                    ]
+                }
+            ],
+            "finiBB": [
+                "3"
+            ],
+            "id": "2",
+            "initBB": [
+                "3"
+            ],
+            "meta": {
+                "name": "_Z3food"
+            }
+        },
+        {
+            "basic_blocks": [],
+            "finiBB": [],
+            "id": "22",
+            "initBB": [],
+            "meta": {
+                "name": "llvm.dbg.declare"
+            }
+        }
+    ],
+    "global_vars": [],
+    "id": "1"
+}

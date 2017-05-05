@@ -1,0 +1,460 @@
+{
+    "cfgs": [
+        {
+            "basic_blocks": [
+                {
+                    "def": [],
+                    "id": "3",
+                    "instructions": [
+                        {
+                            "llvm_raw": "; <label>:%0",
+                            "ploc": null
+                        },
+                        {
+                            "ploc": null,
+                            "raw_llvm": "%1 = alloca i32, align 4"
+                        },
+                        {
+                            "ploc": null,
+                            "raw_llvm": "%2 = alloca i32, align 4"
+                        },
+                        {
+                            "ploc": null,
+                            "raw_llvm": "store i32 %a, i32* %2, align 4"
+                        },
+                        {
+                            "ploc": {
+                                "col_begin": 13,
+                                "line_min": 1,
+                                "source_file": "/home/vkondula/code/thesis/tests/c/test016.c"
+                            },
+                            "raw_llvm": "call void @llvm.dbg.declare(metadata i32* %2, metadata !11, metadata !12), !dbg !13"
+                        },
+                        {
+                            "ploc": {
+                                "col_begin": 9,
+                                "line_min": 2,
+                                "source_file": "/home/vkondula/code/thesis/tests/c/test016.c"
+                            },
+                            "raw_llvm": "%3 = load i32, i32* %2, align 4, !dbg !14"
+                        },
+                        {
+                            "ploc": {
+                                "col_begin": 11,
+                                "line_min": 2,
+                                "source_file": "/home/vkondula/code/thesis/tests/c/test016.c"
+                            },
+                            "raw_llvm": "%4 = icmp slt i32 %3, 3, !dbg !16"
+                        },
+                        {
+                            "ploc": {
+                                "col_begin": 9,
+                                "line_min": 2,
+                                "source_file": "/home/vkondula/code/thesis/tests/c/test016.c"
+                            },
+                            "raw_llvm": "br i1 %4, label %5, label %7, !dbg !17"
+                        }
+                    ],
+                    "meta": {
+                        "called_functions": [],
+                        "label_name": "%0"
+                    },
+                    "ploc": {
+                        "col_begin": 13,
+                        "col_end": 11,
+                        "line_max": 2,
+                        "line_min": 1,
+                        "source_file": "/home/vkondula/code/thesis/tests/c/test016.c"
+                    },
+                    "pred": [],
+                    "succ": [
+                        "16",
+                        "24"
+                    ],
+                    "use": [
+                        "a"
+                    ]
+                },
+                {
+                    "def": [],
+                    "id": "16",
+                    "instructions": [
+                        {
+                            "llvm_raw": "; <label>:%5",
+                            "ploc": null
+                        },
+                        {
+                            "ploc": {
+                                "col_begin": 23,
+                                "line_min": 2,
+                                "source_file": "/home/vkondula/code/thesis/tests/c/test016.c"
+                            },
+                            "raw_llvm": "%6 = load i32, i32* %2, align 4, !dbg !18"
+                        },
+                        {
+                            "ploc": {
+                                "col_begin": 16,
+                                "line_min": 2,
+                                "source_file": "/home/vkondula/code/thesis/tests/c/test016.c"
+                            },
+                            "raw_llvm": "store i32 %6, i32* %1, align 4, !dbg !20"
+                        },
+                        {
+                            "ploc": {
+                                "col_begin": 16,
+                                "line_min": 2,
+                                "source_file": "/home/vkondula/code/thesis/tests/c/test016.c"
+                            },
+                            "raw_llvm": "br label %20, !dbg !20"
+                        }
+                    ],
+                    "meta": {
+                        "called_functions": [],
+                        "label_name": "%5"
+                    },
+                    "ploc": {
+                        "col_begin": 16,
+                        "col_end": 23,
+                        "line_min": 2,
+                        "source_file": "/home/vkondula/code/thesis/tests/c/test016.c"
+                    },
+                    "pred": [
+                        "3"
+                    ],
+                    "succ": [
+                        "66"
+                    ],
+                    "use": []
+                },
+                {
+                    "def": [],
+                    "id": "24",
+                    "instructions": [
+                        {
+                            "llvm_raw": "; <label>:%7",
+                            "ploc": null
+                        },
+                        {
+                            "ploc": {
+                                "col_begin": 14,
+                                "line_min": 3,
+                                "source_file": "/home/vkondula/code/thesis/tests/c/test016.c"
+                            },
+                            "raw_llvm": "%8 = load i32, i32* %2, align 4, !dbg !21"
+                        },
+                        {
+                            "ploc": {
+                                "col_begin": 16,
+                                "line_min": 3,
+                                "source_file": "/home/vkondula/code/thesis/tests/c/test016.c"
+                            },
+                            "raw_llvm": "%9 = icmp slt i32 %8, 5, !dbg !23"
+                        },
+                        {
+                            "ploc": {
+                                "col_begin": 14,
+                                "line_min": 3,
+                                "source_file": "/home/vkondula/code/thesis/tests/c/test016.c"
+                            },
+                            "raw_llvm": "br i1 %9, label %10, label %13, !dbg !24"
+                        }
+                    ],
+                    "meta": {
+                        "called_functions": [],
+                        "label_name": "%7"
+                    },
+                    "ploc": {
+                        "col_begin": 14,
+                        "col_end": 16,
+                        "line_min": 3,
+                        "source_file": "/home/vkondula/code/thesis/tests/c/test016.c"
+                    },
+                    "pred": [
+                        "3"
+                    ],
+                    "succ": [
+                        "32",
+                        "42"
+                    ],
+                    "use": []
+                },
+                {
+                    "def": [],
+                    "id": "32",
+                    "instructions": [
+                        {
+                            "llvm_raw": "; <label>:%10",
+                            "ploc": null
+                        },
+                        {
+                            "ploc": {
+                                "col_begin": 28,
+                                "line_min": 3,
+                                "source_file": "/home/vkondula/code/thesis/tests/c/test016.c"
+                            },
+                            "raw_llvm": "%11 = load i32, i32* %2, align 4, !dbg !25"
+                        },
+                        {
+                            "ploc": {
+                                "col_begin": 30,
+                                "line_min": 3,
+                                "source_file": "/home/vkondula/code/thesis/tests/c/test016.c"
+                            },
+                            "raw_llvm": "%12 = add nsw i32 %11, 1, !dbg !27"
+                        },
+                        {
+                            "ploc": {
+                                "col_begin": 21,
+                                "line_min": 3,
+                                "source_file": "/home/vkondula/code/thesis/tests/c/test016.c"
+                            },
+                            "raw_llvm": "store i32 %12, i32* %1, align 4, !dbg !28"
+                        },
+                        {
+                            "ploc": {
+                                "col_begin": 21,
+                                "line_min": 3,
+                                "source_file": "/home/vkondula/code/thesis/tests/c/test016.c"
+                            },
+                            "raw_llvm": "br label %20, !dbg !28"
+                        }
+                    ],
+                    "meta": {
+                        "called_functions": [],
+                        "label_name": "%10"
+                    },
+                    "ploc": {
+                        "col_begin": 21,
+                        "col_end": 30,
+                        "line_min": 3,
+                        "source_file": "/home/vkondula/code/thesis/tests/c/test016.c"
+                    },
+                    "pred": [
+                        "24"
+                    ],
+                    "succ": [
+                        "66"
+                    ],
+                    "use": []
+                },
+                {
+                    "def": [],
+                    "id": "42",
+                    "instructions": [
+                        {
+                            "llvm_raw": "; <label>:%13",
+                            "ploc": null
+                        },
+                        {
+                            "ploc": {
+                                "col_begin": 14,
+                                "line_min": 4,
+                                "source_file": "/home/vkondula/code/thesis/tests/c/test016.c"
+                            },
+                            "raw_llvm": "%14 = load i32, i32* %2, align 4, !dbg !29"
+                        },
+                        {
+                            "ploc": {
+                                "col_begin": 16,
+                                "line_min": 4,
+                                "source_file": "/home/vkondula/code/thesis/tests/c/test016.c"
+                            },
+                            "raw_llvm": "%15 = icmp slt i32 %14, 10, !dbg !31"
+                        },
+                        {
+                            "ploc": {
+                                "col_begin": 14,
+                                "line_min": 4,
+                                "source_file": "/home/vkondula/code/thesis/tests/c/test016.c"
+                            },
+                            "raw_llvm": "br i1 %15, label %16, label %19, !dbg !32"
+                        }
+                    ],
+                    "meta": {
+                        "called_functions": [],
+                        "label_name": "%13"
+                    },
+                    "ploc": {
+                        "col_begin": 14,
+                        "col_end": 16,
+                        "line_min": 4,
+                        "source_file": "/home/vkondula/code/thesis/tests/c/test016.c"
+                    },
+                    "pred": [
+                        "24"
+                    ],
+                    "succ": [
+                        "50",
+                        "60"
+                    ],
+                    "use": []
+                },
+                {
+                    "def": [],
+                    "id": "50",
+                    "instructions": [
+                        {
+                            "llvm_raw": "; <label>:%16",
+                            "ploc": null
+                        },
+                        {
+                            "ploc": {
+                                "col_begin": 29,
+                                "line_min": 4,
+                                "source_file": "/home/vkondula/code/thesis/tests/c/test016.c"
+                            },
+                            "raw_llvm": "%17 = load i32, i32* %2, align 4, !dbg !33"
+                        },
+                        {
+                            "ploc": {
+                                "col_begin": 31,
+                                "line_min": 4,
+                                "source_file": "/home/vkondula/code/thesis/tests/c/test016.c"
+                            },
+                            "raw_llvm": "%18 = add nsw i32 %17, 1, !dbg !35"
+                        },
+                        {
+                            "ploc": {
+                                "col_begin": 22,
+                                "line_min": 4,
+                                "source_file": "/home/vkondula/code/thesis/tests/c/test016.c"
+                            },
+                            "raw_llvm": "store i32 %18, i32* %1, align 4, !dbg !36"
+                        },
+                        {
+                            "ploc": {
+                                "col_begin": 22,
+                                "line_min": 4,
+                                "source_file": "/home/vkondula/code/thesis/tests/c/test016.c"
+                            },
+                            "raw_llvm": "br label %20, !dbg !36"
+                        }
+                    ],
+                    "meta": {
+                        "called_functions": [],
+                        "label_name": "%16"
+                    },
+                    "ploc": {
+                        "col_begin": 22,
+                        "col_end": 31,
+                        "line_min": 4,
+                        "source_file": "/home/vkondula/code/thesis/tests/c/test016.c"
+                    },
+                    "pred": [
+                        "42"
+                    ],
+                    "succ": [
+                        "66"
+                    ],
+                    "use": []
+                },
+                {
+                    "def": [],
+                    "id": "60",
+                    "instructions": [
+                        {
+                            "llvm_raw": "; <label>:%19",
+                            "ploc": null
+                        },
+                        {
+                            "ploc": {
+                                "col_begin": 10,
+                                "line_min": 5,
+                                "source_file": "/home/vkondula/code/thesis/tests/c/test016.c"
+                            },
+                            "raw_llvm": "store i32 1, i32* %1, align 4, !dbg !37"
+                        },
+                        {
+                            "ploc": {
+                                "col_begin": 10,
+                                "line_min": 5,
+                                "source_file": "/home/vkondula/code/thesis/tests/c/test016.c"
+                            },
+                            "raw_llvm": "br label %20, !dbg !37"
+                        }
+                    ],
+                    "meta": {
+                        "called_functions": [],
+                        "label_name": "%19"
+                    },
+                    "ploc": {
+                        "col_begin": 10,
+                        "line_min": 5,
+                        "source_file": "/home/vkondula/code/thesis/tests/c/test016.c"
+                    },
+                    "pred": [
+                        "42"
+                    ],
+                    "succ": [
+                        "66"
+                    ],
+                    "use": []
+                },
+                {
+                    "def": [],
+                    "id": "66",
+                    "instructions": [
+                        {
+                            "llvm_raw": "; <label>:%20",
+                            "ploc": null
+                        },
+                        {
+                            "ploc": {
+                                "col_begin": 1,
+                                "line_min": 6,
+                                "source_file": "/home/vkondula/code/thesis/tests/c/test016.c"
+                            },
+                            "raw_llvm": "%21 = load i32, i32* %1, align 4, !dbg !38"
+                        },
+                        {
+                            "ploc": {
+                                "col_begin": 1,
+                                "line_min": 6,
+                                "source_file": "/home/vkondula/code/thesis/tests/c/test016.c"
+                            },
+                            "raw_llvm": "ret i32 %21, !dbg !38"
+                        }
+                    ],
+                    "meta": {
+                        "called_functions": [],
+                        "label_name": "%20"
+                    },
+                    "ploc": {
+                        "col_begin": 1,
+                        "line_min": 6,
+                        "source_file": "/home/vkondula/code/thesis/tests/c/test016.c"
+                    },
+                    "pred": [
+                        "60",
+                        "50",
+                        "32",
+                        "16"
+                    ],
+                    "succ": [],
+                    "use": []
+                }
+            ],
+            "finiBB": [
+                "66"
+            ],
+            "id": "2",
+            "initBB": [
+                "3"
+            ],
+            "meta": {
+                "name": "foo"
+            }
+        },
+        {
+            "basic_blocks": [],
+            "finiBB": [],
+            "id": "72",
+            "initBB": [],
+            "meta": {
+                "name": "llvm.dbg.declare"
+            }
+        }
+    ],
+    "global_vars": [],
+    "id": "1"
+}

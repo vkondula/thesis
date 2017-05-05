@@ -182,12 +182,13 @@ int InstructionMeta::build() {
         }
         // Get defined variable, if any
         unsigned int ops_count = instruction->getNumOperands();
-        if(instruction->getOpcode() == llvm::Instruction::Store){
-            if (!instruction->getOperand(1)->hasName()) return 0;
+        if((instruction->getOpcode() == llvm::Instruction::Store) &&
+                (instruction->getOperand(1)->hasName())){
             char c = instruction->getOperand(1)->getName().str().at(0);
-            if (isdigit(c)) return 0; // Temporary variables start with digit
-            defined_variable = instruction->getOperand(1)->getName().str();
-            ops_count--;
+            if (!isdigit(c)){ // Temporary variables start with digit
+                defined_variable = instruction->getOperand(1)->getName().str();
+                ops_count--;
+            }
         }
         // Get operands
         for(unsigned int i = 0; i < ops_count; i++){
