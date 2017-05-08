@@ -1,0 +1,291 @@
+{
+ "title":"Module",
+ "description":"Wrapper around CFGs. Can contain shared metadata.",
+ "type":"object",
+ "required":[
+  "id",
+  "cfgs"
+ ],
+ "properties":{
+  "id":{
+   "type":"string"
+  },
+  "cfgs":{
+   "type":"array",
+   "items":{
+    "title":"Control FLow Graph",
+    "description":"Information about specific CFG.",
+    "type":"object",
+    "required":[
+     "id",
+     "basic_blocks",
+     "initBB",
+     "finiBB"
+    ],
+    "properties":{
+     "id":{
+      "type":"string"
+     },
+     "basic_blocks":{
+      "type":"array",
+      "items":{
+       "title":"Basic Block",
+       "description":"Information about specific BB.",
+       "type":"object",
+       "required":[
+        "id",
+        "pred",
+        "succ",
+        "instructions"
+       ],
+       "properties":{
+        "id":{
+         "type":"string"
+        },
+        "instructions":{
+         "type":"array",
+         "items":{
+          "description":"Global variables for module",
+          "type":"object",
+          "items":{
+           "title":"Instruction",
+           "description":"Information about specific LLVM instruction.",
+           "type":"object",
+           "oneOf":[
+            {
+             "required":[
+              "raw_llvm"
+             ]
+            },
+            {
+             "required":[
+              "opcode, operands"
+             ]
+            }
+           ],
+           "properties":{
+            "raw_llvm":{
+             "type":"string"
+            },
+            "ploc":{
+             "title":"Program location",
+             "description":"Information about program location of LLVM instruction.",
+             "type":"object",
+             "required":[
+              "line_min",
+              "source_file"
+             ],
+             "properties":{
+              "source_file":{
+               "type":"string"
+              },
+              "line_min":{
+               "type":"number"
+              },
+              "col_begin":{
+               "type":"number"
+              },
+              "line_max":{
+               "type":"number"
+              },
+              "col_end":{
+               "type":"number"
+              },
+              "meta":{
+               "description":"Custom metadata",
+               "type":"object"
+              }
+             }
+            },
+            "meta":{
+             "description":"Custom metadata",
+             "type":"object"
+            },
+            "opcode":{
+             "type":"object"
+            },
+            "operands":{
+             "type":"array",
+             "items":{
+              "type":"string"
+             }
+            }
+           }
+          }
+         }
+        },
+        "pred":{
+         "description":"List of predcessor BB IDs",
+         "type":"array",
+         "items":{
+          "type":"string"
+         }
+        },
+        "succ":{
+         "description":"List of successors BB IDs",
+         "type":"array",
+         "items":{
+          "type":"string"
+         }
+        },
+        "ploc":{
+         "title":"Program location",
+         "description":"Information about program location of LLVM instruction",
+         "type":"object",
+         "required":[
+          "line_min",
+          "source_file"
+         ],
+         "properties":{
+          "source_file":{
+           "type":"string"
+          },
+          "line_min":{
+           "type":"number"
+          },
+          "col_begin":{
+           "type":"number"
+          },
+          "line_max":{
+           "type":"number"
+          },
+          "col_end":{
+           "type":"number"
+          },
+          "meta":{
+           "description":"Custom metadata",
+           "type":"object"
+          }
+         }
+        },
+        "def":{
+         "description":"List of variables defined in this basic block",
+         "type":"array",
+         "items":{
+          "type":"string"
+         }
+        },
+        "use":{
+         "description":"List of variables used in this basic block",
+         "type":"array",
+         "items":{
+          "type":"string"
+         }
+        },
+        "meta":{
+         "description":"Custom metadata",
+         "type":"object"
+        }
+       }
+      }
+     },
+     "initBB":{
+      "description":"List of initial basic block IDs",
+      "type":"array",
+      "items":{
+       "type":"string"
+      }
+     },
+     "finiBB":{
+      "description":"List of finishing basic block IDs",
+      "type":"array",
+      "items":{
+       "type":"string"
+      }
+     },
+     "source_files":{
+      "type":"array",
+      "items":{
+       "type":"string"
+      }
+     },
+     "meta":{
+      "description":"Custom metadata",
+      "type":"object"
+     }
+    }
+   }
+  },
+  "global_vars":{
+   "description":"Global variables for module",
+   "type":"array",
+   "items":{
+    "title":"Instruction",
+    "description":"Information about specific LLVM instruction.",
+    "type":"object",
+    "oneOf":[
+     {
+      "required":[
+       "raw_llvm"
+      ]
+     },
+     {
+      "required":[
+       "opcode, operands"
+      ]
+     }
+    ],
+    "properties":{
+     "raw_llvm":{
+      "type":"string"
+     },
+     "ploc":{
+      "title":"Program location",
+      "description":"Information about program location of LLVM instruction.",
+      "type":"object",
+      "required":[
+       "line_min",
+       "source_file"
+      ],
+      "properties":{
+       "source_file":{
+        "type":"string"
+       },
+       "line_min":{
+        "type":"number"
+       },
+       "col_begin":{
+        "type":"number"
+       },
+       "line_max":{
+        "type":"number"
+       },
+       "col_end":{
+        "type":"number"
+       },
+       "meta":{
+        "description":"Custom metadata",
+        "type":"object"
+       }
+      }
+     },
+     "meta":{
+      "description":"Custom metadata",
+      "type":"object"
+     },
+     "opcode":{
+      "type":"object"
+     },
+     "operands":{
+      "type":"array",
+      "items":{
+       "type":"string"
+      }
+     }
+    }
+   }
+  },
+  "modules":{
+   "description":"IDs for dependent modules",
+   "type":"array",
+   "items":{
+    "type":"number"
+   }
+  },
+  "meta":{
+   "description":"Custom metadata",
+   "type":"object"
+  }
+ }
+}
+
